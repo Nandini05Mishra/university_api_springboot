@@ -1,0 +1,119 @@
+### API tests. Install the "REST Client" extension in VS Code, then click "Send Request" above any request.
+### Start the app first. It runs at http://localhost:8080
+
+@base = http://localhost:8080/api
+
+### ---------- DEPARTMENTS ----------
+GET {{base}}/departments
+
+###
+GET {{base}}/departments/1
+
+###
+POST {{base}}/departments
+Content-Type: application/json
+
+{ "deptId": 1, "deptName": "Computer Science", "building": "Block A", "budget": 2500000 }
+
+###
+PUT {{base}}/departments/1
+Content-Type: application/json
+
+{ "deptName": "Computer Science & Engineering", "building": "Block A", "budget": 2800000 }
+
+###
+DELETE {{base}}/departments/1
+
+### ---------- TEACHERS ----------
+GET {{base}}/teachers
+
+###
+POST {{base}}/teachers
+Content-Type: application/json
+
+{ "teacherId": 101, "name": "Dr. Test Teacher", "designation": "Professor", "experience": 12, "salary": 100000,
+  "department": { "deptId": 1 } }
+
+###
+PUT {{base}}/teachers/101
+Content-Type: application/json
+
+{ "name": "Dr. Test Teacher", "designation": "Professor", "experience": 13, "salary": 110000,
+  "department": { "deptId": 1 } }
+
+###
+DELETE {{base}}/teachers/101
+
+### ---------- STUDENTS ----------
+GET {{base}}/students
+
+###
+POST {{base}}/students
+Content-Type: application/json
+
+{ "studentId": 1001, "name": "Riya Singh", "city": "Noida", "admissionYear": 2024, "cgpa": 8.4,
+  "department": { "deptId": 1 } }
+
+###
+PUT {{base}}/students/1001
+Content-Type: application/json
+
+{ "name": "Riya Singh", "city": "Delhi", "admissionYear": 2024, "cgpa": 8.6,
+  "department": { "deptId": 1 } }
+
+###
+DELETE {{base}}/students/1001
+
+### ---------- COURSES ----------
+GET {{base}}/courses
+
+###
+POST {{base}}/courses
+Content-Type: application/json
+
+{ "courseId": 201, "courseTitle": "Machine Learning", "credits": 4, "department": { "deptId": 1 } }
+
+###
+PUT {{base}}/courses/201
+Content-Type: application/json
+
+{ "courseTitle": "Machine Learning", "credits": 3, "department": { "deptId": 1 } }
+
+###
+DELETE {{base}}/courses/201
+
+### ---------- TEACHES ----------
+GET {{base}}/teaches
+
+###
+GET {{base}}/teaches/teacher/101
+
+###
+POST {{base}}/teaches
+Content-Type: application/json
+
+{ "id": { "teacherId": 101, "courseId": 201 } }
+
+###
+DELETE {{base}}/teaches/101/201
+
+### ---------- ENROLLMENTS ----------
+GET {{base}}/enrollments
+
+###
+GET {{base}}/enrollments/student/1001
+
+###
+POST {{base}}/enrollments
+Content-Type: application/json
+
+{ "id": { "studentId": 1001, "courseId": 201 }, "marks": 85, "attendance": 90 }
+
+###
+PUT {{base}}/enrollments/1001/201
+Content-Type: application/json
+
+{ "marks": 90, "attendance": 95 }
+
+###
+DELETE {{base}}/enrollments/1001/201
